@@ -20,7 +20,7 @@ const Join = () => {
   const validateFields = () => {
     //validation check
     //1. 빈값이 없는지
-    //2. id,pw 형식에 맞는지(영어, 숫자 조합 몇글자 이상) - 정규식 사용
+    //2. id,pw 형식에 맞는지(영어, 숫자 조합 몇글자 이상) - 정규식 사용 -- 지금예제에는 없음
     //3. pw 두번 입력하는거 두 개 같은지
     const { idElement, pwElement, pw2Element, simpleDescElement } =
       refs.current;
