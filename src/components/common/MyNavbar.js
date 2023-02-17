@@ -19,6 +19,11 @@ import SearchImg from "../../assets/search.png";
 const MyNavbar = () => {
   const navigate = useNavigate();
   const authStore = AuthStore();
+  const logout = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("rememberId");
+    navigate("/login");
+  };
 
   return (
     <div style={{ backgroundColor: "lightgray" }}>
@@ -82,7 +87,7 @@ const MyNavbar = () => {
                       className="dropdown-item"
                       href="#"
                       onClick={() => {
-                        navigate("/login", { replace: true });
+                        logout();
                       }}
                     >
                       로그아웃

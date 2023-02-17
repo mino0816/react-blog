@@ -22,7 +22,7 @@ function App() {
           <Route path="/join" element={<Join />} />
           <Route path="/login" element={<Login />} />
           <Route path="/insert-post" element={<InsertPost />} />
-          <Route path="/update-post" element={<UpdatePost />} />
+          <Route path="/update-post/:idx" element={<UpdatePost />} />
           <Route path="/my" element={<My />} />
           <Route path="/change-info" element={<ChangeInfo />} />
           <Route path="/*" element={<Error404 />} />
