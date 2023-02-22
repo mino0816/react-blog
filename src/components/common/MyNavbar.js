@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   Anchor,
   Button,
@@ -11,18 +11,29 @@ import {
   NavDropdown,
   Row,
 } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import LogoImg from "../../assets/logo.png";
 import AuthStore from "../../stores/AuthStore";
 import SearchImg from "../../assets/search.png";
 
-const MyNavbar = () => {
+const MyNavbar = ({ post, setPost }) => {
   const navigate = useNavigate();
   const authStore = AuthStore();
+  const location = useLocation();
+  const searchForm = useRef(null);
+
   const logout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("rememberId");
     navigate("/login");
+  };
+
+  const searchPost = () => {
+    const keyword = searchForm.current.value;
+    // console.log(post);
+    const result = post.filter((p) => p.title.includes(keyword));
+    setPost(result);
+    //const[searchResult, setSearchResult]= useState()
   };
 
   return (
@@ -31,6 +42,21 @@ const MyNavbar = () => {
         <Link to={"/"}>
           <Image src={LogoImg} style={{ height: "40px" }} />
         </Link>
+        {location.pathname === "/" ? (
+          <div style={{ width: "500px" }}>
+            <Form className="d-flex">
+              <Form.Control
+                type="text"
+                placeholder="search"
+                ref={(r) => (searchForm.current = r)}
+              />
+              <button className="btn" type="button" onClick={searchPost}>
+                <image src={SearchImg} width={"20"} />
+              </button>
+            </Form>
+          </div>
+        ) : null}
+
         <Container>
           <div>
             <InputGroup>
@@ -70,15 +96,6 @@ const MyNavbar = () => {
                       />
                     }
                   >
-                    <div className="dropdown-item">
-                      <Form className="d-flex">
-                        <Form.Control type="text" placeholder="serarch" />
-                        <button className="btn" type="button">
-                          <image src={SearchImg} width={"20"} />
-                        </button>
-                      </Form>
-                    </div>
-                    <Dropdown.Divider />
                     <Link to={"/my"} className="dropdown-item">
                       마이페이지
                     </Link>

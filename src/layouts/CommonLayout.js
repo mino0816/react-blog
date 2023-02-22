@@ -1,10 +1,10 @@
 import React from "react";
 import MyNavbar from "../components/common/MyNavbar";
 
-const CommonLayout = ({ children }) => {
+const CommonLayout = ({ children, post, setPost }) => {
   return (
     <div>
-      <MyNavbar />
+      <MyNavbar post={post} setPost={setPost} />
       {children}
     </div>
   );
